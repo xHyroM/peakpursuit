@@ -1,4 +1,4 @@
-package me.xhyrom.peakpursuit.structs;
+package me.xhyrom.peakpursuit.structs.actions;
 
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;

@@ -1,4 +1,4 @@
-package me.xhyrom.peakpursuit.structs;
+package me.xhyrom.peakpursuit.structs.actions;
 
 import org.bukkit.entity.Player;
 

@@ -2,6 +2,7 @@ package me.xhyrom.peakpursuit.structs;
 
 import lombok.Getter;
 import me.xhyrom.peakpursuit.PeakPursuit;
+import me.xhyrom.peakpursuit.structs.actions.*;
 import me.xhyrom.peakpursuit.utils.Utils;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;

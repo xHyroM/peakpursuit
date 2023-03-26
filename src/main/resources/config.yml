@@ -1,0 +1,41 @@
+messages:
+  start: "<green>King of the Hill <name> has started!"
+  end:
+    - "<green>King of the Hill <name> has ended!"
+    - "<green>1. <white><first> <dark_gray>- <gold><first_score><white> seconds"
+    - "<yellow>2. <white><second> <dark_gray>- <gold><second_score><white> seconds"
+    - "<red>3. <white><third> <dark_gray>- <gold><third_score><white> seconds"
+  action-bar: "You have <green><score><white> seconds on the King of the Hill!"
+
+koth:
+  - name: lol
+    world-name: world
+    region-name: koth
+    # in seconds - every 10 seconds start king of the hill
+    auto-run:
+      interval: 10
+      min-players: 30
+    # in seconds - how long the king of the hill will last
+    duration: 5
+    boss-bar:
+      title: "<green>King of the Hill <name>"
+      progress: 1.0
+      color: green
+      overlay: progress
+
+    rewards:
+      1:
+        - { command: "eco give <player> 100" }
+        - { message: "<green>You have won 1st place the King of the Hill and received 100$" }
+        - { sound: "entity.experience_bottle.throw", volume: 1, pitch: 1 }
+        - { title: "<green>+100$" }
+      2:
+        - { command: "eco give <player> 100" }
+        - { message: "<green>You have won 2nd place the King of the Hill and received 100$" }
+        - { sound: "entity.experience_bottle.throw", volume: 1, pitch: 1 }
+        - { title: "<green>+100$" }
+      3:
+        - { command: "eco give <player> 100" }
+        - { message: "<green>You have won 3rd place the King of the Hill and received 100$" }
+        - { sound: "entity.experience_bottle.throw", volume: 1, pitch: 1 }
+        - { title: "<green>+100$" }

@@ -1,0 +1,9 @@
+name: PeakPursuit
+description: Conquer the Hill and Claim the Crown in this exciting King of the Hill plugin. (King Of The Hill)
+version: 1.0.0
+author: xHyroM
+main: me.xhyrom.peakpursuit.PeakPursuit
+api-version: 1.19
+
+depend:
+  - WorldGuard

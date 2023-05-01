@@ -20,6 +20,7 @@ public class Koth {
     private ConfigBossBar bossBar;
     private AutoRun autoRun;
     private int duration;
+    private int startedAt;
     private HashMap<Integer, ArrayList<Action>> rewards;
     private ArrayList<UUID> players = new ArrayList<>();
     private HashMap<UUID, Integer> scores = new HashMap<>();
@@ -45,6 +46,7 @@ public class Koth {
         ));
 
         this.bossBar.create(this);
+        this.startedAt = (int) (System.currentTimeMillis() / 1000L);
 
         BukkitTask task = Bukkit.getScheduler().runTaskTimerAsynchronously(PeakPursuit.getInstance(), () -> {
             for (Player player : Utils.getPlayersInRegion(this.regionName, this.worldName)) {
@@ -63,6 +65,8 @@ public class Koth {
                         Placeholder.parsed("score", String.valueOf(scores.get(player.getUniqueId())))
                 ));
             }
+
+            this.bossBar.bossBar.progress(1 - ((float) (System.currentTimeMillis() / 1000L - this.startedAt) / this.duration));
         }, 0, 20);
 
         Bukkit.getScheduler().runTaskLater(PeakPursuit.getInstance(), () -> {

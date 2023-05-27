@@ -4,7 +4,9 @@ import dev.jorel.commandapi.CommandAPICommand;
 import dev.jorel.commandapi.arguments.MultiLiteralArgument;
 import dev.jorel.commandapi.arguments.StringArgument;
 import me.xhyrom.peakpursuit.PeakPursuit;
+import me.xhyrom.peakpursuit.storage.structs.Votes;
 import me.xhyrom.peakpursuit.structs.Koth;
+import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 
 public class PeakPursuitCommand {
@@ -17,6 +19,8 @@ public class PeakPursuitCommand {
                         )
                         .executes(PeakPursuitCommand::start)
                 )
+                .withSubcommand(new CommandAPICommand("addvote")
+                        .executes(PeakPursuitCommand::addVote))
                 .register();
     }
 
@@ -25,5 +29,26 @@ public class PeakPursuitCommand {
         Koth koth = PeakPursuit.getInstance().getKoths().get(kothName);
 
         koth.start();
+    }
+
+    public static void addVote(CommandSender sender, Object[] args) {
+        Bukkit.getScheduler().runTaskAsynchronously(PeakPursuit.getInstance(), () -> {
+            Votes votes = PeakPursuit.getInstance().getStorage().connection
+                    .select()
+                    .from(PeakPursuit.getInstance().getStorage().table)
+                    .obtainOne(Votes.class)
+                    .orElse(new Votes(0));
+
+            votes.setVotes(votes.getVotes() + 1);
+
+            PeakPursuit.getInstance().getStorage().connection
+                    .save(PeakPursuit.getInstance().getStorage().table, votes);
+
+            for (Koth koth : PeakPursuit.getInstance().getKoths().values()) {
+                if (koth.getAutoRun().votes.enabled) {
+                    koth.getAutoRun().votes.start(koth, votes.getVotes());
+                }
+            }
+        });
     }
 }

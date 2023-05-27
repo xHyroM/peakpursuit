@@ -18,6 +18,7 @@ public class Koth {
     private String regionName;
     @Getter
     private ConfigBossBar bossBar;
+    @Getter
     private AutoRun autoRun;
     private int duration;
     private int startedAt;

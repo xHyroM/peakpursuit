@@ -1,3 +1,6 @@
+storage:
+  table: votes
+
 messages:
   start: "<green>King of the Hill <name> has started!"
   end:
@@ -13,8 +16,12 @@ koth:
     region-name: koth
     # in seconds - every 10 seconds start king of the hill
     auto-run:
-      interval: 10
-      min-players: 30
+      every:
+        interval: 10
+        min-players: 30
+      votes:
+        enabled: true
+        required: 10
     # in seconds - how long the king of the hill will last
     duration: 5
     boss-bar:

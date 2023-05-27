@@ -5,6 +5,8 @@ import dev.jorel.commandapi.CommandAPIConfig;
 import lombok.Getter;
 import me.xhyrom.peakpursuit.commands.PeakPursuitCommand;
 import me.xhyrom.peakpursuit.listeners.PlayerListener;
+import me.xhyrom.peakpursuit.storage.Storage;
+import me.xhyrom.peakpursuit.storage.structs.Votes;
 import me.xhyrom.peakpursuit.structs.Koth;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -19,6 +21,8 @@ public class PeakPursuit extends JavaPlugin {
     @Getter
     private HashMap<String, Koth> koths = new HashMap<>();
     public FileConfiguration config = getConfig();
+    @Getter
+    private Storage storage;
 
     @Override
     public void onLoad() {
@@ -31,6 +35,13 @@ public class PeakPursuit extends JavaPlugin {
 
         saveDefaultConfig();
         CommandAPI.onEnable(this);
+
+        storage = new Storage(
+                this.getDataFolder().getPath(),
+                "data.db",
+                config.getString("storage.table")
+        );
+        storage.connection.buildEntitySchema(storage.table, Votes.class);
 
         config.getMapList("koth").forEach(map -> koths.put((String) map.get("name"), Koth.fromConfig(map)));
 

@@ -1,29 +1,24 @@
 package me.xhyrom.peakpursuit.structs;
 
-import me.xhyrom.peakpursuit.PeakPursuit;
-import org.bukkit.Bukkit;
-
 import java.util.HashMap;
 
 public class AutoRun {
-    public int interval;
-    public int minPlayers;
+    public AutoRunEvery every;
+    public AutoRunVotes votes;
 
-    public AutoRun(int interval, int maxPlayers) {
-        this.interval = interval;
-        this.minPlayers = maxPlayers;
+    public AutoRun(AutoRunEvery every, AutoRunVotes votes) {
+        this.every = every;
+        this.votes = votes;
     }
 
     public void start(Koth koth) {
-        Bukkit.getScheduler().runTaskTimer(PeakPursuit.getInstance(), () -> {
-            if (Bukkit.getOnlinePlayers().size() >= minPlayers && !koth.isRunning) koth.start();
-        }, 0, interval * 20L);
+        if (every.enabled) every.start(koth);
     }
 
     public static AutoRun fromConfig(HashMap<String, Object> map) {
         return new AutoRun(
-                (int) map.get("interval"),
-                (int) map.get("min-players")
+                AutoRunEvery.fromConfig((HashMap<String, Object>) map.get("every")),
+                AutoRunVotes.fromConfig((HashMap<String, Object>) map.get("votes"))
         );
     }
 }

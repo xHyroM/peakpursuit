@@ -22,6 +22,8 @@ dependencies {
     annotationProcessor("org.projectlombok:lombok:1.18.26")
 
     implementation("dev.jorel:commandapi-shade:8.8.0")
+    implementation("com.github.ZorTik:AdvancedSQLClient:0.6.1")
+    implementation("org.xerial:sqlite-jdbc:3.41.2.1")
 
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.8.1")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.8.1")

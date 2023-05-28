@@ -9,6 +9,7 @@ import org.bukkit.Bukkit;
 public class Storage {
     public SQLDatabaseConnection connection;
     public String table;
+    public int votes;
 
     public Storage(
             String folder,

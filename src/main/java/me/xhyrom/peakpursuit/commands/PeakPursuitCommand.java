@@ -40,6 +40,7 @@ public class PeakPursuitCommand {
                     .orElse(new Votes(1, 0));
 
             votes.setVotes(votes.getVotes() + 1);
+            PeakPursuit.getInstance().getStorage().votes = votes.getVotes();
 
             sender.sendMessage("Votes: " + votes.getVotes());
 

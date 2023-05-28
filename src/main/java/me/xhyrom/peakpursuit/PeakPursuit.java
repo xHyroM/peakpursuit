@@ -4,6 +4,7 @@ import dev.jorel.commandapi.CommandAPI;
 import dev.jorel.commandapi.CommandAPIConfig;
 import lombok.Getter;
 import me.xhyrom.peakpursuit.commands.PeakPursuitCommand;
+import me.xhyrom.peakpursuit.hooks.Hooks;
 import me.xhyrom.peakpursuit.listeners.PlayerListener;
 import me.xhyrom.peakpursuit.storage.Storage;
 import me.xhyrom.peakpursuit.storage.structs.Votes;
@@ -45,6 +46,7 @@ public class PeakPursuit extends JavaPlugin {
 
         config.getMapList("koth").forEach(map -> koths.put((String) map.get("name"), Koth.fromConfig(map)));
 
+        Hooks.init();
         PeakPursuitCommand.register();
 
         Bukkit.getPluginManager().registerEvents(new PlayerListener(), this);

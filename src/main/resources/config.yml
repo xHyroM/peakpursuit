@@ -17,6 +17,7 @@ koth:
     # in seconds - every 10 seconds start king of the hill
     auto-run:
       every:
+        enabled: true
         interval: 10
         min-players: 30
       votes:

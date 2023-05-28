@@ -8,6 +8,7 @@ import me.zort.sqllib.internal.annotation.PrimaryKey;
 @AllArgsConstructor
 public class Votes {
     @PrimaryKey
+    private int id;
     @Setter
     @Getter
     private int votes;

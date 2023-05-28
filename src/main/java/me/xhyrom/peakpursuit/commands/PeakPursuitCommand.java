@@ -2,7 +2,6 @@ package me.xhyrom.peakpursuit.commands;
 
 import dev.jorel.commandapi.CommandAPICommand;
 import dev.jorel.commandapi.arguments.MultiLiteralArgument;
-import dev.jorel.commandapi.arguments.StringArgument;
 import me.xhyrom.peakpursuit.PeakPursuit;
 import me.xhyrom.peakpursuit.storage.structs.Votes;
 import me.xhyrom.peakpursuit.structs.Koth;
@@ -36,13 +35,15 @@ public class PeakPursuitCommand {
             Votes votes = PeakPursuit.getInstance().getStorage().connection
                     .select()
                     .from(PeakPursuit.getInstance().getStorage().table)
+                    .where().isEqual("id", 1)
                     .obtainOne(Votes.class)
-                    .orElse(new Votes(0));
+                    .orElse(new Votes(1, 0));
 
             votes.setVotes(votes.getVotes() + 1);
 
             PeakPursuit.getInstance().getStorage().connection
-                    .save(PeakPursuit.getInstance().getStorage().table, votes);
+                    .save(PeakPursuit.getInstance().getStorage().table, votes).execute();
+
 
             for (Koth koth : PeakPursuit.getInstance().getKoths().values()) {
                 if (koth.getAutoRun().votes.enabled) {

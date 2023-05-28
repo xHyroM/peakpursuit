@@ -20,7 +20,7 @@ public class AutoRunVotes {
         koth.start();
 
         PeakPursuit.getInstance().getStorage().connection
-                .save(PeakPursuit.getInstance().getStorage().table, new Votes(0));
+                .save(PeakPursuit.getInstance().getStorage().table, new Votes(1, 0));
     }
 
     public static AutoRunVotes fromConfig(HashMap<String, Object> map) {

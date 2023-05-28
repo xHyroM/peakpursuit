@@ -40,6 +40,10 @@ public class Koth {
     }
 
     public void start() {
+        if (isRunning) {
+            return; // Already running
+        }
+
         isRunning = true;
         Bukkit.broadcast(MiniMessage.miniMessage().deserialize(
                 PeakPursuit.getInstance().config.getString("messages.start"),
@@ -94,8 +98,8 @@ public class Koth {
             players = new ArrayList<>();
             scores = new HashMap<>();
 
-            this.bossBar.destroy();
             task.cancel();
+            this.bossBar.destroy();
             isRunning = false;
         }, duration * 20L);
     }

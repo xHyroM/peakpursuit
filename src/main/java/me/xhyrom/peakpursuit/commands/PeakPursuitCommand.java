@@ -41,13 +41,14 @@ public class PeakPursuitCommand {
 
             votes.setVotes(votes.getVotes() + 1);
 
+            sender.sendMessage("Votes: " + votes.getVotes());
+
             PeakPursuit.getInstance().getStorage().connection
                     .save(PeakPursuit.getInstance().getStorage().table, votes).execute();
 
-
             for (Koth koth : PeakPursuit.getInstance().getKoths().values()) {
                 if (koth.getAutoRun().votes.enabled) {
-                    koth.getAutoRun().votes.start(koth, votes.getVotes());
+                    koth.getAutoRun().votes.start(koth, votes);
                 }
             }
         });

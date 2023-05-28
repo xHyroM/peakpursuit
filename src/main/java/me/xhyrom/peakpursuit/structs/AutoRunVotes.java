@@ -14,13 +14,15 @@ public class AutoRunVotes {
         this.required = required;
     }
 
-    public void start(Koth koth, int count) {
-        if (count < required) return;
+    public void start(Koth koth, Votes votes) {
+        if (votes.getVotes() < required) return;
 
         koth.start();
 
+        votes.setVotes(0);
         PeakPursuit.getInstance().getStorage().connection
-                .save(PeakPursuit.getInstance().getStorage().table, new Votes(1, 0));
+                .save(PeakPursuit.getInstance().getStorage().table, votes)
+                .execute();
     }
 
     public static AutoRunVotes fromConfig(HashMap<String, Object> map) {

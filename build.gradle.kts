@@ -23,7 +23,7 @@ dependencies {
     compileOnly("org.projectlombok:lombok:1.18.26")
     annotationProcessor("org.projectlombok:lombok:1.18.26")
 
-    implementation("dev.jorel:commandapi-shade:8.8.0")
+    implementation("dev.jorel:commandapi-bukkit-shade:9.0.3")
     implementation("com.github.ZorTik:AdvancedSQLClient:0.6.1")
     implementation("org.xerial:sqlite-jdbc:3.41.2.1")
 

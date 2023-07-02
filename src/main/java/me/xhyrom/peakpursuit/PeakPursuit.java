@@ -1,6 +1,7 @@
 package me.xhyrom.peakpursuit;
 
 import dev.jorel.commandapi.CommandAPI;
+import dev.jorel.commandapi.CommandAPIBukkitConfig;
 import dev.jorel.commandapi.CommandAPIConfig;
 import lombok.Getter;
 import me.xhyrom.peakpursuit.commands.PeakPursuitCommand;
@@ -27,7 +28,7 @@ public class PeakPursuit extends JavaPlugin {
 
     @Override
     public void onLoad() {
-        CommandAPI.onLoad(new CommandAPIConfig().silentLogs(true));
+        CommandAPI.onLoad(new CommandAPIBukkitConfig(this).silentLogs(true));
     }
 
     @Override
@@ -35,7 +36,7 @@ public class PeakPursuit extends JavaPlugin {
         instance = this;
 
         saveDefaultConfig();
-        CommandAPI.onEnable(this);
+        CommandAPI.onEnable();
 
         storage = new Storage(
                 this.getDataFolder().getPath(),

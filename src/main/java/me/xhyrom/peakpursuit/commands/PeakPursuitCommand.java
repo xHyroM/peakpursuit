@@ -2,11 +2,14 @@ package me.xhyrom.peakpursuit.commands;
 
 import dev.jorel.commandapi.CommandAPICommand;
 import dev.jorel.commandapi.arguments.MultiLiteralArgument;
+import dev.jorel.commandapi.executors.CommandArguments;
 import me.xhyrom.peakpursuit.PeakPursuit;
 import me.xhyrom.peakpursuit.storage.structs.Votes;
 import me.xhyrom.peakpursuit.structs.Koth;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
+
+import java.util.List;
 
 public class PeakPursuitCommand {
     public static void register() {
@@ -14,7 +17,7 @@ public class PeakPursuitCommand {
                 .withPermission("peakpursuit.admin")
                 .withSubcommand(new CommandAPICommand("start")
                         .withArguments(
-                                new MultiLiteralArgument(PeakPursuit.getInstance().getKoths().keySet().toArray(new String[0]))
+                                new MultiLiteralArgument("name", List.of(PeakPursuit.getInstance().getKoths().keySet().toArray(new String[0])))
                         )
                         .executes(PeakPursuitCommand::start)
                 )
@@ -23,14 +26,14 @@ public class PeakPursuitCommand {
                 .register();
     }
 
-    public static void start(CommandSender sender, Object[] args) {
-        String kothName = (String) args[0];
+    public static void start(CommandSender sender, CommandArguments args) {
+        String kothName = (String) args.get(0);
         Koth koth = PeakPursuit.getInstance().getKoths().get(kothName);
 
         koth.start();
     }
 
-    public static void addVote(CommandSender sender, Object[] args) {
+    public static void addVote(CommandSender sender, CommandArguments args) {
         Bukkit.getScheduler().runTaskAsynchronously(PeakPursuit.getInstance(), () -> {
             Votes votes = PeakPursuit.getInstance().getStorage().connection
                     .select()

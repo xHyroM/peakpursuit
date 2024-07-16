@@ -21,7 +21,7 @@ public class PeakPursuit extends JavaPlugin {
     @Getter
     private static PeakPursuit instance;
     @Getter
-    private HashMap<String, Koth> koths = new HashMap<>();
+    private final HashMap<String, Koth> koths = new HashMap<>();
     public FileConfiguration config = getConfig();
     @Getter
     private Storage storage;

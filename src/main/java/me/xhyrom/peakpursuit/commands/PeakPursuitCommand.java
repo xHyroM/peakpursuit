@@ -9,15 +9,13 @@ import me.xhyrom.peakpursuit.structs.Koth;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 
-import java.util.List;
-
 public class PeakPursuitCommand {
     public static void register() {
         new CommandAPICommand("peakpursuit")
                 .withPermission("peakpursuit.admin")
                 .withSubcommand(new CommandAPICommand("start")
                         .withArguments(
-                                new MultiLiteralArgument("name", List.of(PeakPursuit.getInstance().getKoths().keySet().toArray(new String[0])))
+                                new MultiLiteralArgument("name", PeakPursuit.getInstance().getKoths().keySet().toArray(new String[0]))
                         )
                         .executes(PeakPursuitCommand::start)
                 )
